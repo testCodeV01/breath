@@ -27,8 +27,7 @@ module Breath
         raise InvalidPassword unless object.authenticate(sessions_params[:password])
 
         object.remember
-        cookies.permanent.signed["#{target_name}_id".to_sym] = object.id
-        cookies.permanent[:remember_token] = object.remember_token
+        write_cookie(target_name, object)
 
         render status: 200
       rescue StandardError => e
@@ -48,6 +47,16 @@ module Breath
 
       define_method :sessions_params do
         params.require(:sessions).permit(target_class.auth_attribute.to_sym, :password, :password_confirmation)
+      end
+    end
+
+    def write_cookie(target_name, object)
+      unless Rails.application.config.respond_to? :breath_expires
+        cookies.permanent.signed["#{target_name}_id".to_sym] = object.id
+        cookies.permanent[:remember_token] = object.remember_token
+      else
+        cookies.signed["#{target_name}_id".to_sym] = { value: object.id, expires: Rails.application.config.breath_expires }
+        cookies[:remember_token] = { value: object.remember_token, expires: Rails.application.config.breath_expires }
       end
     end
   end
