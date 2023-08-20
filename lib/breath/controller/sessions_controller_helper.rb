@@ -51,12 +51,12 @@ module Breath
     end
 
     def write_cookie(target_name, object)
-      unless Rails.application.config.respond_to? :breath_expires
-        cookies.permanent.signed["#{target_name}_id".to_sym] = object.id
-        cookies.permanent[:remember_token] = object.remember_token
-      else
+      if Rails.application.config.respond_to? :breath_expires
         cookies.signed["#{target_name}_id".to_sym] = { value: object.id, expires: Rails.application.config.breath_expires }
         cookies[:remember_token] = { value: object.remember_token, expires: Rails.application.config.breath_expires }
+      else
+        cookies.permanent.signed["#{target_name}_id".to_sym] = object.id
+        cookies.permanent[:remember_token] = object.remember_token
       end
     end
   end
