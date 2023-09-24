@@ -96,6 +96,18 @@ DELETE /users/logout
 
 Then, you don't need write the codes to introduce authorizations.
 
+#### Config
+This plugin need cookie, and you can configure the cookie expires like bellow.<br/>
+```ruby
+module YourApp
+  class Application < Rails::Application
+    ...
+
+    config.breath_expires = 3.days
+  end
+end
+```
+
 #### Last Work
 You need to create view side.<br/>
 In view side, you have remaining works.<br/>
