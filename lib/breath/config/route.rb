@@ -1,11 +1,11 @@
 class ActionDispatch::Routing::Mapper
   def breath(routes_name, &resources)
     namespace routes_name do
-      get "/" => "sessions#new"
+      get "/login" => "sessions#new"
       post "login" => "sessions#login"
       delete "logout" => "sessions#logout"
 
-      resources.call
+      resources.call if resources.present?
     end
   end
 end

@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 7.0.7"
-  spec.add_development_dependency "rspec-rails"
+  spec.add_dependency "bcrypt"
 end

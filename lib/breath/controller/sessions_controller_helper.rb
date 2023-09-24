@@ -13,15 +13,13 @@ module Breath
 
       skip_before_action :authenticate!, only: %i[new login logout]
 
-      # GET /schedule_kun/target
+      # GET /schedule_kun/target/login
       define_method :new do
         render status: 200
       end
 
       # POST /schedule_kun/target/login
       define_method :login do
-        raise InvalidPasswordConfirmation if sessions_params[:password] != sessions_params[:password_confirmation]
-
         object = target_class.enabled.find_by(**{ "#{target_class.auth_attribute}": sessions_params[target_class.auth_attribute.to_sym] })
         raise TargetNotFound if object.nil?
         raise InvalidPassword unless object.authenticate(sessions_params[:password])
@@ -31,18 +29,18 @@ module Breath
 
         render status: 200
       rescue StandardError => e
-        render_401 e.to_s
+        send :render_401, e.to_s
       end
 
       # DELETE /schedule_kun/target/logout
       define_method :logout do
-        send(current_target).forget
+        send(current_target)&.forget
         @current_target = nil
 
         cookies.delete("#{target_name}_id".to_sym)
         cookies.delete(:remember_token)
 
-        render statud: 200
+        render status: 200
       end
 
       define_method :sessions_params do

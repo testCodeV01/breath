@@ -19,6 +19,12 @@ module Breath::Model
     def attr_breath(attribute)
       class_attribute :auth_attribute, default: attribute
     end
+
+    unless respond_to?(:enabled)
+      define_method :enabled do
+        self
+      end
+    end
   end
 
   included do
