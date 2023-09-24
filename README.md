@@ -37,7 +37,7 @@ Here, with `attr_breath`, you need to specify the user's attribute with authenti
 
 #### Migration
 In migration file, you need to add `password_digest`, and `remember_digest` attributes.<br/>
-And if you specify the `attr_breath` attribute with email, you need to add `email` attribute.
+And if you specify the email attribute within `attr_breath`, you need to add `email` attribute in migration file.
 ```ruby
 class CreateUsers < ActiveRecord::Migration[7.0]
   def change
