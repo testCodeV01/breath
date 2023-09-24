@@ -74,7 +74,7 @@ class Users::ApplicationController < ApplicationController
   crsf_protect true
 end
 ```
-Here, if `csrf_protect` is `true`, Csrf protection is enabled.<br/>
+Here, if `csrf_protect` is `true`, CSRF protection is enabled.<br/>
 
 - app/controllers/users/sessions_controller.rb
 ```ruby
