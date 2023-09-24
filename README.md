@@ -94,7 +94,9 @@ POST /users/login
 DELETE /users/logout
 ```
 
-Then, you don't need write the codes to introduce authorizations.
+Then, you don't need write the codes to introduce authorizations.<br/>
+
+You can use `current_user` method which is current logined user.
 
 #### Config
 This plugin need cookie, and you can configure the cookie expires like bellow.<br/>
