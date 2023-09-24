@@ -107,6 +107,7 @@ module YourApp
   end
 end
 ```
+If you don't configure this, cookie is set permanently.
 
 #### Last Work
 You need to create view side.<br/>
