@@ -86,6 +86,24 @@ end
 `Breath::ApplicationControllerHelper` intoroduce the user's authorization.<br/>
 `Breath::SessionsControllerHelper` introduce the actions `login`, and `logout`.
 
+Then, you don't need write the codes to introduce authorizations.<br/>
+
+You can use `current_user` method which is current logined user.
+
+#### Route
+Write `route.rb`
+```ruby
+Rails.application.routes.draw do
+  breath :users
+
+  ...or...
+
+  breath :users do
+    get "test" => "sessions#test"
+  end
+end
+```
+
 After you added these lines, show `bundle exec rails routes` command.<br/>
 You can see these routes are added.
 ```
@@ -93,10 +111,7 @@ GET /users/login
 POST /users/login
 DELETE /users/logout
 ```
-
-Then, you don't need write the codes to introduce authorizations.<br/>
-
-You can use `current_user` method which is current logined user.
+Or, nested users routes.
 
 #### Config
 This plugin need cookie, and you can configure the cookie expires like bellow.<br/>
