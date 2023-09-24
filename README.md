@@ -33,7 +33,7 @@ class User < ApplicationRecord
   attr_breath :email
 end
 ```
-Here, with `attr_breath`, you need to specify the attribute of user with authentication.
+Here, with `attr_breath`, you need to specify the user's attribute with authentication.
 
 #### Migration
 In migration file, you need to add `password_digest`, and `remember_digest` attributes.<br/>
