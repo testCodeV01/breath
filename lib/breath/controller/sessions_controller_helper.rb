@@ -44,7 +44,7 @@ module Breath
       end
 
       define_method :sessions_params do
-        params.require(:sessions).permit(target_class.auth_attribute.to_sym, :password, :password_confirmation)
+        params.require(:sessions).permit(target_class.auth_attribute.to_sym, :password)
       end
     end
 
