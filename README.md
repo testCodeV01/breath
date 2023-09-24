@@ -98,7 +98,7 @@ Then, you don't need write the codes to introduce authorizations.
 
 #### Last Work
 You need to create view side.<br/>
-In view side, you have remain works.<br/>
+In view side, you have remaining works.<br/>
 if you `csrf_protect true`, you need to introduce `withCredentials: true` option in client side.<br/>
 And, write csrf token into the cookie with `csrf_token` key.
 
