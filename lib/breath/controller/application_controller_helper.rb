@@ -5,6 +5,10 @@ module Breath
     class AuthenticationError < StandardError; end
 
     included do
+      rescue_from StandardError, with: :render_500
+      rescue_from ActionController::InvalidAuthenticityToken, with: :render_422
+
+
       target_class = to_s.split("::")[-2].singularize.constantize
       target_name = target_class.to_s.underscore
       current_target = "current_#{target_name}"

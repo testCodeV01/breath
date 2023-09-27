@@ -127,16 +127,65 @@ end
 If you don't configure this, cookie is set permanently.
 
 #### Error
-When errors occur, rescue from the errors automaticaly. And, you can overwrite rescues like bellow.
+When an error occurs when trying to log in or authorize, rescue from the error automatically.
+Otherwise, you can also overwrite rescue method like bellow.<br/>
+`app/controllers/users/application_controller.rb`
 ```ruby
-def render_401(e)
-  # Write your programs. Here, e is error class.
-  # e.g. Rails.logger.error(e.to_s)
+class Users::ApplicationController < ApplicationController
+  ...
 
-  super({ error: 111, message: "error occur." })
+  def render_401(e)
+    # Write your programs. Here, e is error class.
+    # e.g. Rails.logger.error(e.to_s)
+
+    super({ error: 111, message: "error occur." })
+  end
+
+  ...
 end
 ```
-An argument you pass to super is returned to the client side as JSON value.
+An argument you pass to super is returned to the client side as JSON value.<br/>
+In addition, breath plugin provides bellow rescue methods.
+```ruby
+render_400
+render_401 # Unauthorized.
+render_404 # Not Found.
+render_409 # Conflict.
+render_422 # Unprocessable Entity.
+render_500 # Internal Server Error.
+```
+You can use these rescue methods in controllers like bellow.
+```ruby
+class Users::HogeController < Users::ApplicationController
+  def index
+    ...
+    render status: 200
+  rescue => e
+    render_404 e
+  end
+
+  def update
+    ...
+    render status: 201
+  rescue => e
+    render_409 e
+  end
+end
+```
+Breath plugin automatically rescues from CSRF token error which is status 422, and Internal Server Error with status code 500.<br/>
+And you can overwrite these rescue methods.
+```ruby
+class Users::ApplicationController < ApplicationController
+  ...
+
+  def render_500(e)
+    ...
+    super
+  end
+
+  ...
+end
+```
 
 #### Last Work
 You need to create view side.<br/>

@@ -7,8 +7,6 @@ module Breath
     class InvalidPassword < StandardError; end
 
     included do
-      rescue_from ActionController::InvalidAuthenticityToken, with: :render_422
-
       target_class = to_s.split("::")[-2].singularize.constantize
       target_name = target_class.to_s.underscore
       current_target = "current_#{target_name}"
