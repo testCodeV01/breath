@@ -168,24 +168,14 @@ class Users::HogeController < Users::ApplicationController
     ...
     render status: 201
   rescue => e
-    render_409 e
+    response_body = { error_code: 100, message: "error" }
+
+    render_409 response_body
   end
 end
 ```
 Breath plugin automatically rescues from CSRF token error which is status 422, and Internal Server Error with status code 500.<br/>
 And you can overwrite these rescue methods.
-```ruby
-class Users::ApplicationController < ApplicationController
-  ...
-
-  def render_500(e)
-    ...
-    super
-  end
-
-  ...
-end
-```
 
 #### Last Work
 You need to create view side.<br/>
