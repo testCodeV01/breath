@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    breath (0.2.1)
+    breath (0.3.1)
       bcrypt (>= 3.0)
       rails (>= 7.0)
 
