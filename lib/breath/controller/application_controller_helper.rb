@@ -8,7 +8,6 @@ module Breath
       rescue_from StandardError, with: :render_500
       rescue_from ActionController::InvalidAuthenticityToken, with: :render_422
 
-
       target_class = to_s.split("::")[-2].singularize.constantize
       target_name = target_class.to_s.underscore
       current_target = "current_#{target_name}"
@@ -52,19 +51,19 @@ module Breath
   
       render json: res, status: 400
     end
-  
+
     def render_401(res)
       Rails.logger.error error_message(res)
   
       render json: res, status: 401
     end
-  
+
     def render_404(res)
       Rails.logger.error error_message(res)
   
       render json: res, status: 404
     end
-  
+
     def render_409(res)
       Rails.logger.error error_message(res)
   
@@ -76,13 +75,13 @@ module Breath
   
       render json: res, status: 422
     end
-  
+
     def render_500(res)
       Rails.logger.error error_message(res)
   
       render json: res, status: 500
     end
-  
+
     def error_message(error)
       "[ERROR] #{error.to_s}"
     end
