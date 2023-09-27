@@ -126,6 +126,18 @@ end
 ```
 If you don't configure this, cookie is set permanently.
 
+#### Error
+When errors occur, rescue from the errors automaticaly. And, you can overwrite rescues like bellow.
+```ruby
+def render_401(e)
+  # Write your programs. Here, e is error class.
+  # e.g. Rails.logger.error(e.to_s)
+
+  super({ error: 111, message: "error occur." })
+end
+```
+An argument you pass to super is returned to the client side as JSON value.
+
 #### Last Work
 You need to create view side.<br/>
 In view side, you have remaining works.<br/>
