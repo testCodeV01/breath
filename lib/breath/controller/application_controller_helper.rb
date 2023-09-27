@@ -20,7 +20,7 @@ module Breath
 
         raise AuthenticationError if target.nil?
       rescue StandardError => e
-        send :render_401, e.to_s
+        send :render_401, e
       end
 
       define_method current_target do
@@ -65,6 +65,12 @@ module Breath
       Rails.logger.error error_message(res)
   
       render json: res, status: 409
+    end
+
+    def render_422(res)
+      Rails.logger.error error_message(res)
+  
+      render json: res, status: 422
     end
   
     def render_500(res)

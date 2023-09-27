@@ -7,6 +7,8 @@ module Breath
     class InvalidPassword < StandardError; end
 
     included do
+      rescue_from ActionController::InvalidAuthenticityToken, with: :render_422
+
       target_class = to_s.split("::")[-2].singularize.constantize
       target_name = target_class.to_s.underscore
       current_target = "current_#{target_name}"
@@ -29,7 +31,7 @@ module Breath
 
         render status: 200
       rescue StandardError => e
-        send :render_401, e.to_s
+        send :render_401, e
       end
 
       # DELETE /schedule_kun/target/logout
