@@ -8,12 +8,12 @@ module Breath
       rescue_from StandardError, with: :render_500
       rescue_from ActionController::InvalidAuthenticityToken, with: :render_422
 
-      target_class = to_s.split("::")[-2].singularize.constantize
+      target_class = to_s.deconstantize.demodulize.singularize.constantize
       target_name = target_class.to_s.underscore
       current_target = "current_#{target_name}"
 
       include ActionController::Cookies
-    
+
       define_method :authenticate! do
         raise AuthenticationError unless cookies.key?("#{target_name}_id".to_sym)
         raise AuthenticationError if send(current_target).nil?
@@ -48,37 +48,37 @@ module Breath
 
     def render_400(res)
       Rails.logger.error error_message(res)
-  
+
       render json: res, status: 400
     end
 
     def render_401(res)
       Rails.logger.error error_message(res)
-  
+
       render json: res, status: 401
     end
 
     def render_404(res)
       Rails.logger.error error_message(res)
-  
+
       render json: res, status: 404
     end
 
     def render_409(res)
       Rails.logger.error error_message(res)
-  
+
       render json: res, status: 409
     end
 
     def render_422(res)
       Rails.logger.error error_message(res)
-  
+
       render json: res, status: 422
     end
 
     def render_500(res)
       Rails.logger.error error_message(res)
-  
+
       render json: res, status: 500
     end
 
