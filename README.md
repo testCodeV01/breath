@@ -181,7 +181,9 @@ And you can overwrite these rescue methods.
 You need to create view side.<br/>
 In view side, you have remaining works.<br/>
 if you `csrf_protect true`, you need to introduce `withCredentials: true` option in client side.<br/>
-And, write csrf token into the cookie with `csrf_token` key.
+And, write csrf token into the cookie with `csrf_token` key.<br/>
+If your application needs to be requested by an client side application, you need to configure the  Cross-Origin Resource Sharing (CORS) .<br/>
+You can introduce the CORS configure by `rack-cors` rails gem.
 
 ## Contributing
 Contribution directions go here.
