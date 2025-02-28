@@ -25,7 +25,7 @@ $ gem install breath
 
 #### Model
 If you want to introduce a authentication to `User` model.<br/>
-Add these lines to `user.rb` like bellow.
+Add these lines to `user.rb` like below.
 ```ruby
 class User < ApplicationRecord
   include Breath::Model
@@ -55,7 +55,7 @@ After these lines you added, excute `bundle exec rails db:migrate`.
 
 
 #### Controller
-You need to construct the directory like bellow.
+You need to construct the directory like below.
 ```
 /app/controllers
   - application_controller.rb
@@ -114,7 +114,7 @@ DELETE /users/logout
 Or, nested users routes.
 
 #### Config
-This plugin need cookie, and you can configure the cookie expires like bellow.<br/>
+This plugin need cookie, and you can configure the cookie expires like below.<br/>
 ```ruby
 module YourApp
   class Application < Rails::Application
@@ -128,7 +128,7 @@ If you don't configure this, cookie is set permanently.
 
 #### Error
 When an error occurs when trying to log in or authorize, rescue from the error automatically.
-Otherwise, you can also overwrite rescue method like bellow.<br/>
+Otherwise, you can also overwrite rescue method like below.<br/>
 `app/controllers/users/application_controller.rb`
 ```ruby
 class Users::ApplicationController < ApplicationController
@@ -145,7 +145,7 @@ class Users::ApplicationController < ApplicationController
 end
 ```
 An argument you pass to super is returned to the client side as JSON value.<br/>
-In addition, breath plugin provides bellow rescue methods.
+In addition, breath plugin provides below rescue methods.
 ```ruby
 render_400
 render_401 # Unauthorized.
@@ -154,7 +154,7 @@ render_409 # Conflict.
 render_422 # Unprocessable Entity.
 render_500 # Internal Server Error.
 ```
-You can use these rescue methods in controllers like bellow.
+You can use these rescue methods in controllers like below.
 ```ruby
 class Users::HogeController < Users::ApplicationController
   def index
@@ -184,9 +184,6 @@ if you `csrf_protect true`, you need to introduce `withCredentials: true` option
 And, write csrf token into the cookie with `csrf_token` key.<br/>
 If your application needs to be requested by an client side application, you need to configure the  Cross-Origin Resource Sharing (CORS) .<br/>
 You can introduce the CORS configure by `rack-cors` rails gem.
-
-## Contributing
-Contribution directions go here.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
